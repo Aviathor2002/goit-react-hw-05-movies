@@ -5,9 +5,8 @@ import { PATH } from 'router/Path';
 import Movies from 'Pages/Movies';
 import MovieDetails from 'Pages/MovieDetails';
 import { MainLayout } from 'Layouts/MainLayout';
-
-import { Rewies } from './Rewies';
-import { CastInfo } from './CastInfo';
+import CastInfo from 'Pages/CastInfo';
+import ReviewsInfo from 'Pages/ReviewsInfo';
 
 export const App = () => {
   return (
@@ -18,7 +17,7 @@ export const App = () => {
           <Route path={PATH.Movies} element={<Movies />} />
           <Route path="/movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<CastInfo />} />
-            <Route path="reviews" element={<Rewies />} />
+            <Route path="reviews" element={<ReviewsInfo />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Route>

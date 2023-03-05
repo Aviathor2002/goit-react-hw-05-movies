@@ -2,7 +2,7 @@ import { getMovieById } from 'api/postAPI';
 
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
   const location = useLocation();
@@ -50,7 +50,11 @@ const MovieDetails = () => {
           <Link to={`/movies/${movieId}/cast`} state={{ from: location }}>
             Cast
           </Link>
+          <Link to={`/movies/${movieId}/reviews`} state={{ from: location }}>
+            Reviews
+          </Link>
         </div>
+        <Outlet />
       </>
     );
   }

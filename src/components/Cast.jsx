@@ -1,4 +1,4 @@
-export const Cast = ({ casts }) => {
+const Cast = ({ casts }) => {
   return (
     <ul>
       {casts.map(cast => (
@@ -22,3 +22,4 @@ export const Cast = ({ casts }) => {
     </ul>
   );
 };
+export default Cast;

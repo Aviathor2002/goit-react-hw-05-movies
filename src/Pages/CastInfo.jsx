@@ -1,10 +1,10 @@
 import { getMoviesCast } from 'api/postAPI';
+import Cast from 'components/Cast';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Cast } from './Cast';
 
-export const CastInfo = () => {
+const CastInfo = () => {
   const [cast, setCast] = useState([]);
   const [status, setStatus] = useState('idle');
   const { movieId } = useParams();
@@ -20,7 +20,6 @@ export const CastInfo = () => {
       } catch {
         setStatus('error');
       } finally {
-        console.log(movieId);
       }
     };
 
@@ -35,9 +34,8 @@ export const CastInfo = () => {
   }
 
   return (
-    <div>
-      {console.log('CAST')}
-      {cast.length !== 0 ? <Cast casts={cast} /> : <p>Loading...</p>}
-    </div>
+    <div>{cast.length !== 0 ? <Cast casts={cast} /> : <p>Loading...</p>}</div>
   );
 };
+
+export default CastInfo;

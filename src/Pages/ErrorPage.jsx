@@ -4,7 +4,7 @@ const ErrorPage = () => {
   return (
     <>
       <h1>Error 404, page not found</h1>
-      <Link to={PATH.TrendingMovie}>Go to homepage</Link>
+      <Link to={PATH.Home}>Go to homepage</Link>
     </>
   );
 };
