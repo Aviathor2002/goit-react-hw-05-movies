@@ -1,7 +1,15 @@
-const SearchForm = () => {
+import { useState } from 'react';
+
+const SearchForm = ({ onSubmit }) => {
+  const [inputValue, setInputValue] = useState('');
+  const formSubmit = e => {
+    e.preventDefault();
+    onSubmit(inputValue);
+    setInputValue('');
+  };
   return (
     <div>
-      <form>
+      <form onSubmit={formSubmit}>
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +27,12 @@ const SearchForm = () => {
             />
           </svg>
 
-          <input type="text" placeholder="Enter name of movie..." />
+          <input
+            type="text"
+            placeholder="Enter name of movie..."
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
+          />
         </div>
 
         <button type="submit">Search</button>
