@@ -32,20 +32,22 @@ const MovieDetails = () => {
     return <h1> Smth went wrong. Eror 404</h1>;
   }
 
-  return (
-    <>
-      <img
-        src={movieDetail.belongs_to_collection.poster_path}
-        alt={movieDetail.belongs_to_collection.name}
-      />
-      <h1>Name: {movieDetail.belongs_to_collection.name}</h1>
-      <p>User score:{}</p>
-      <h3>Owerview:</h3>
-      <p></p>
-      <h3>Genres:</h3>
-      <p></p>
-    </>
-  );
+  if (status === 'fulfilled') {
+    return (
+      <>
+        <img
+          src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
+          alt={movieDetail.title}
+        />
+        <h1>Name: {movieDetail.title}</h1>
+        <p>User score:{movieDetail.vote_average}</p>
+        <h3>Owerview:</h3>
+        <p>{movieDetail.overview}</p>
+        <h3>Genres:</h3>
+        <p>{movieDetail.genres.map(gener => gener.name + ',' + ' ')}</p>
+      </>
+    );
+  }
 };
 
 export default MovieDetails;
