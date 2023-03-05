@@ -1,9 +1,11 @@
 import { getMovieById } from 'api/postAPI';
+
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
+  const location = useLocation();
   const { movieId } = useParams();
 
   const [movieDetail, setMovieDetail] = useState(null);
@@ -22,8 +24,6 @@ const MovieDetails = () => {
       .catch(error => setStatus('error'))
       .finally(setIsLoading(false));
   }, [movieId]);
-
-  console.log(movieDetail);
 
   if (status === 'idle' || isLoading) {
     return <h1> Loading...</h1>;
@@ -44,7 +44,13 @@ const MovieDetails = () => {
         <h3>Owerview:</h3>
         <p>{movieDetail.overview}</p>
         <h3>Genres:</h3>
-        <p>{movieDetail.genres.map(gener => gener.name + ',' + ' ')}</p>
+        <p>{movieDetail.genres.map(gener => gener.name)}</p>
+        <div>
+          <h4>Aditional informatoin</h4>
+          <Link to={`/movies/${movieId}/cast`} state={{ from: location }}>
+            Cast
+          </Link>
+        </div>
       </>
     );
   }

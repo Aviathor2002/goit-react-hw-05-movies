@@ -3,20 +3,25 @@ import ErrorPage from 'Pages/ErrorPage';
 import { Routes, Route } from 'react-router-dom';
 import { PATH } from 'router/Path';
 import Movies from 'Pages/Movies';
-import Header from './Header';
 import MovieDetails from 'Pages/MovieDetails';
+import { MainLayout } from 'Layouts/MainLayout';
+
+import { Rewies } from './Rewies';
+import { CastInfo } from './CastInfo';
 
 export const App = () => {
   return (
     <div>
-      <Header />
       <Routes>
-        <Route path={PATH.Home} element={<TreningMovie />} />
-        <Route path={PATH.Movies} element={<Movies />} />
-        <Route path={PATH.MovieDetails} element={<MovieDetails />} />
-        <Route path="*" element={<ErrorPage />} />
-        {/* <Route path="/about" element={<About />} /> */}
-        {/* <Route path="/products" element={<Products />} /> */}
+        <Route path={PATH.Home} element={<MainLayout />}>
+          <Route index element={<TreningMovie />} />
+          <Route path={PATH.Movies} element={<Movies />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />}>
+            <Route path="cast" element={<CastInfo />} />
+            <Route path="reviews" element={<Rewies />} />
+          </Route>
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
       </Routes>
     </div>
   );
