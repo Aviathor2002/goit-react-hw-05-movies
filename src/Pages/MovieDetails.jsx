@@ -1,16 +1,19 @@
 import { getMovieById } from 'api/postAPI';
-
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
-  const location = useLocation();
   const { movieId } = useParams();
 
   const [movieDetail, setMovieDetail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState('idle');
+
+  const location = useLocation();
+
+  const goBack = location.state?.from ?? '/';
+  console.log(goBack);
 
   useEffect(() => {
     setIsLoading(true);
@@ -35,6 +38,7 @@ const MovieDetails = () => {
   if (status === 'fulfilled') {
     return (
       <>
+        <Link to={goBack}>Go back</Link>
         <img
           src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
           alt={movieDetail.title}
@@ -47,10 +51,18 @@ const MovieDetails = () => {
         <p>{movieDetail.genres.map(gener => gener.name)}</p>
         <div>
           <h4>Aditional informatoin</h4>
-          <Link to={`/movies/${movieId}/cast`} state={{ from: location }}>
+          <Link
+            to={`/movies/${movieId}/cast`}
+            state={{ from: location }}
+            replace
+          >
             Cast
           </Link>
-          <Link to={`/movies/${movieId}/reviews`} state={{ from: location }}>
+          <Link
+            to={`/movies/${movieId}/reviews`}
+            state={{ from: location }}
+            replace
+          >
             Reviews
           </Link>
         </div>
