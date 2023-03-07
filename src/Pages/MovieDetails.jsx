@@ -15,8 +15,7 @@ const MovieDetails = () => {
 
   const location = useLocation();
 
-  const goBack = location.state?.from ?? '/';
-  console.log(goBack);
+  const goBack = location?.state?.from ?? '/';
 
   useEffect(() => {
     setIsLoading(true);
