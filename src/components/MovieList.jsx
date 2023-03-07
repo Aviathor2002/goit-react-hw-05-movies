@@ -1,4 +1,4 @@
-import { generatePath, Link, useLocation } from 'react-router-dom';
+import { generatePath, useLocation } from 'react-router-dom';
 import { PATH } from 'router/Path';
 import {
   ListMovie,
