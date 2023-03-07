@@ -1,5 +1,5 @@
 import { getMoviesReviews } from 'api/postAPI';
-import Reviews from 'components/Reviews';
+import Reviews from './Reviews';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 

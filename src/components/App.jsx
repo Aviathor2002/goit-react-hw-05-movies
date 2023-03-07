@@ -7,8 +7,8 @@ const MovieDetails = lazy(() => import('Pages/MovieDetails'));
 const ErrorPage = lazy(() => import('Pages/ErrorPage'));
 const Movies = lazy(() => import('Pages/Movies'));
 const TreningMovie = lazy(() => import('Pages/TrendingMovie'));
-const CastInfo = lazy(() => import('components/CastInfo'));
-const ReviewsInfo = lazy(() => import('components/ReviewsInfo'));
+const CastInfo = lazy(() => import('./Movie/AddinionalInfo/CastInfo'));
+const ReviewsInfo = lazy(() => import('./Movie/AddinionalInfo/ReviewsInfo'));
 
 export const App = () => {
   return (

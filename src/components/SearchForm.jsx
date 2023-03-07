@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button, Form, FormConteiner, Input } from './SearchForm.styled';
 
 const SearchForm = ({ onSubmit }) => {
   const [inputValue, setInputValue] = useState('');
@@ -9,15 +10,15 @@ const SearchForm = ({ onSubmit }) => {
   };
   return (
     <div>
-      <form onSubmit={formSubmit}>
-        <div>
+      <Form onSubmit={formSubmit}>
+        <FormConteiner>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 absolute left-4 translate-y-1/2"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            width={16}
+            width={30}
           >
             <path
               strokeLinecap="round"
@@ -27,16 +28,16 @@ const SearchForm = ({ onSubmit }) => {
             />
           </svg>
 
-          <input
+          <Input
             type="text"
             placeholder="Enter name of movie..."
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
           />
-        </div>
+        </FormConteiner>
 
-        <button type="submit">Search</button>
-      </form>
+        <Button type="submit">Search</Button>
+      </Form>
     </div>
   );
 };

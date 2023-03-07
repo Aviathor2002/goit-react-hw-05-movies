@@ -13,7 +13,7 @@ export const MainLayout = () => {
           <Outlet />
         </Content>
       </Suspense>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

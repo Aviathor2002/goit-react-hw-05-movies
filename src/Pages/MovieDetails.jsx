@@ -1,7 +1,10 @@
 import { getMovieById } from 'api/postAPI';
-import { useState } from 'react';
+import AdditionalInfo from 'components/Movie/AddinionalInfo/AdditionalInfo';
+import MovieCard from 'components/Movie/MovieCard';
+import { Suspense, useState } from 'react';
 import { useEffect } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { BackButton, DetailsContainer } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -37,37 +40,14 @@ const MovieDetails = () => {
 
   if (status === 'fulfilled') {
     return (
-      <>
-        <Link to={goBack}>Go back</Link>
-        <img
-          src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
-          alt={movieDetail.title}
-        />
-        <h1>Name: {movieDetail.title}</h1>
-        <p>User score:{movieDetail.vote_average}</p>
-        <h3>Owerview:</h3>
-        <p>{movieDetail.overview}</p>
-        <h3>Genres:</h3>
-        <p>{movieDetail.genres.map(gener => gener.name)}</p>
-        <div>
-          <h4>Aditional informatoin</h4>
-          <Link
-            to={`/movies/${movieId}/cast`}
-            state={{ from: location }}
-            replace
-          >
-            Cast
-          </Link>
-          <Link
-            to={`/movies/${movieId}/reviews`}
-            state={{ from: location }}
-            replace
-          >
-            Reviews
-          </Link>
-        </div>
-        <Outlet />
-      </>
+      <DetailsContainer>
+        <BackButton to={goBack}>Go back</BackButton>
+        <MovieCard movieDetail={movieDetail} />
+        <AdditionalInfo />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </DetailsContainer>
     );
   }
 };

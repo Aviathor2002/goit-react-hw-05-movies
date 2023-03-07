@@ -1,13 +1,15 @@
+import { ReviewItem, ReviewList } from './Reviews.styled';
+
 const Reviews = ({ reviews }) => {
   return (
-    <ul>
+    <ReviewList>
       {reviews.map(review => (
-        <li key={review.id}>
+        <ReviewItem key={review.id}>
           <p>{`Author: ${review.author}`}</p>
           <p>{review.content}</p>
-        </li>
+        </ReviewItem>
       ))}
-    </ul>
+    </ReviewList>
   );
 };
 export default Reviews;

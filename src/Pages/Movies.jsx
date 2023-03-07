@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import MovieList from '../components/MovieList';
-import SearchForm from './SearchForm';
+import SearchForm from 'components/SearchForm';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -37,8 +37,10 @@ const Movies = () => {
 
   return (
     <div>
-      <h1>Search movie</h1>
-      <SearchForm onSubmit={handleFormSubmit} />
+      <div>
+        <h1>Search movie</h1>
+        <SearchForm onSubmit={handleFormSubmit} />
+      </div>
       <MovieList movies={movies} />
     </div>
   );

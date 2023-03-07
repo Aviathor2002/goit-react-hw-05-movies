@@ -1,4 +1,5 @@
 import { getTrendingMovies } from 'api/postAPI';
+import MovieList from 'components/MovieList';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { generatePath, Link, useLocation } from 'react-router-dom';
@@ -16,30 +17,7 @@ const TreningMovie = () => {
   return (
     <>
       <h1>Tranding today</h1>
-      <ul>
-        {trendingMovies.map(movie => {
-          return (
-            <li key={movie.id}>
-              {console.log(movie)}
-              <Link
-                to={generatePath(PATH.MovieDetails, {
-                  movieId: movie.id,
-                })}
-                state={{ from: location }}
-              >
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                />
-                <div>
-                  <h2>{movie.title}</h2>
-                  <span>{movie.release_date}</span>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <MovieList movies={trendingMovies} />
     </>
   );
 };

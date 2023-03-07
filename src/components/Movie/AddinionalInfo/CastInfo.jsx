@@ -1,5 +1,5 @@
 import { getMoviesCast } from 'api/postAPI';
-import Cast from 'components/Cast';
+import Cast from './Cast';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
