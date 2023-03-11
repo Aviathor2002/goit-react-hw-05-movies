@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { generatePath, useLocation } from 'react-router-dom';
 import { PATH } from 'router/Path';
 import {
@@ -15,21 +16,21 @@ const MovieList = ({ movies }) => {
   return (
     <ListMovie>
       {movies &&
-        movies.map(movie => (
-          <MovieItem key={movie.id}>
+        movies.map(({ id, title, release_date, poster_path }) => (
+          <MovieItem key={id}>
             <MovieLink
               to={generatePath(PATH.MovieDetails, {
-                movieId: movie.id,
+                movieId: id,
               })}
               state={{ from: location }}
             >
               <MovieImg
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
+                src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                alt={title}
               />
               <div>
-                <Title>{movie.title}</Title>
-                <Text>{movie.release_date}</Text>
+                <Title>{title}</Title>
+                <Text>{release_date}</Text>
               </div>
             </MovieLink>
           </MovieItem>
@@ -39,3 +40,14 @@ const MovieList = ({ movies }) => {
 };
 
 export default MovieList;
+
+MovieList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      release_date: PropTypes.string.isRequired,
+      poster_path: PropTypes.string,
+    }).isRequired
+  ).isRequired,
+};

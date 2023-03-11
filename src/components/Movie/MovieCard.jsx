@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   MovieCardContainer,
   MovieCardContent,
@@ -9,24 +10,23 @@ import {
 } from './MovieCard.styled';
 
 const MovieCard = ({ movieDetail }) => {
+  const { poster_path, title, vote_average, overview, genres } = movieDetail;
   return (
     <MovieCardContainer>
       <MovieCardImage
-        src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
-        alt={movieDetail.title}
+        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        alt={title}
       />
       <MovieCardContent>
-        <MovieCardTitle>Name: {movieDetail.title}</MovieCardTitle>
-        <MovieCardDescription>
-          User score: {movieDetail.vote_average}
-        </MovieCardDescription>
+        <MovieCardTitle>Name: {title}</MovieCardTitle>
+        <MovieCardDescription>User score: {vote_average}</MovieCardDescription>
 
-        <MovieCardDescription>{movieDetail.overview}</MovieCardDescription>
+        <MovieCardDescription>{overview}</MovieCardDescription>
 
         <MovieCardGenres>
-          {movieDetail.genres &&
-            movieDetail.genres.map(genre => (
-              <MovieCardGenre key={genre.id}>{genre.name}</MovieCardGenre>
+          {genres &&
+            genres.map(({ id, name }) => (
+              <MovieCardGenre key={id}>{name}</MovieCardGenre>
             ))}
         </MovieCardGenres>
       </MovieCardContent>
@@ -34,3 +34,18 @@ const MovieCard = ({ movieDetail }) => {
   );
 };
 export default MovieCard;
+
+MovieCard.propTypes = {
+  movieDetail: PropTypes.shape({
+    poster_path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    vote_average: PropTypes.number.isRequired,
+    overview: PropTypes.string.isRequired,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      }).isRequired
+    ).isRequired,
+  }),
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   CastItem,
   CastItemImage,
@@ -9,23 +10,23 @@ import {
 const Cast = ({ casts }) => {
   return (
     <CastItem>
-      {casts.map(cast => (
-        <CastItemLi key={cast.id}>
+      {casts.map(({ id, profile_path, name, character }) => (
+        <CastItemLi key={id}>
           <CastItemText>
-            {cast.profile_path ? (
+            {profile_path ? (
               <CastItemImage
-                src={`https://image.tmdb.org/t/p/w185${cast.profile_path}`}
-                alt={cast.name}
+                src={`https://image.tmdb.org/t/p/w185${profile_path}`}
+                alt={name}
               />
             ) : (
               <CastItemImage
-                src={`https://image.tmdb.org/t/p/w185${cast.profile_path}`}
-                alt={cast.name}
+                src={`https://image.tmdb.org/t/p/w185${profile_path}`}
+                alt={name}
               />
             )}
 
-            <CastItemTextP> {cast.name}</CastItemTextP>
-            <CastItemTextP>{cast.character}</CastItemTextP>
+            <CastItemTextP> {name}</CastItemTextP>
+            <CastItemTextP>{character}</CastItemTextP>
           </CastItemText>
         </CastItemLi>
       ))}
@@ -33,3 +34,14 @@ const Cast = ({ casts }) => {
   );
 };
 export default Cast;
+
+Cast.propTypes = {
+  casts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      profile_path: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      character: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+};
